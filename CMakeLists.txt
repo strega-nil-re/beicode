@@ -12,20 +12,11 @@ project(beicode
 include(CMakePackageConfigHelpers)
 include(GNUInstallDirs)
 
-add_library(beicode src/beicode.cpp include/beicode.h)
-add_library(beicode::beicode ALIAS beicode)
-
-if(BUILD_SHARED_LIBS AND WIN32)
-	target_compile_definitions(beicode
-		PRIVATE "BEICODE_EXPORT=__declspec(dllexport)"
-		INTERFACE "BEICODE_EXPORT=__declspec(dllimport)")
-endif()
+rho_add_library(beicode
+	SKIP_COMMON_FLAGS
+	SKIP_INSTALL)
 
 target_compile_features(beicode PUBLIC cxx_std_17)
-target_include_directories(beicode
-	PUBLIC
-		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-		$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 configure_package_config_file(cmake/config.cmake.in
 	${CMAKE_CURRENT_BINARY_DIR}/beicode-config.cmake
@@ -42,7 +33,9 @@ install(
 	DESTINATION
 		${CMAKE_INSTALL_DATADIR}/beicode)
 
-install(TARGETS beicode EXPORT beicode-targets)
+install(TARGETS beicode
+	EXPORT beicode-targets
+	FILE_SET HEADERS)
 install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(EXPORT beicode-targets
 	NAMESPACE beicode::

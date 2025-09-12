@@ -1,12 +1,10 @@
 #pragma once
 
+#include <beicode/export_macro.h>
+
 #include <stddef.h>
 
 #include <system_error>
-
-#if !defined(BEICODE_EXPORT)
-#define BEICODE_EXPORT
-#endif
 
 namespace beicode
 {
