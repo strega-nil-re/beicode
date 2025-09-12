@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.25)
 
 set(beicode_VERSION 1.0.0)
 
+include(cmake/rho-boot.cmake)
 project(beicode
 	VERSION ${beicode_VERSION}
 	DESCRIPTION "A simple utf-8 based unicode decoding and encoding library"
