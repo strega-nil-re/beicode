@@ -7,7 +7,7 @@ project(beicode
 	HOMEPAGE_URL "https://github.com/northwindtraders/beicode"
 	LANGUAGES CXX)
 
-rho_add_library(beicode
-	SKIP_COMMON_FLAGS)
+set(RHO_DISABLED_GNU_WARNING_FLAGS sign-conversion)
 
-target_compile_features(beicode PUBLIC cxx_std_17)
+set(RHO_CXX_STANDARD 17)
+rho_add_library(beicode)
